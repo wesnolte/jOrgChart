@@ -71,13 +71,13 @@ This call will append the markup for the OrgChart to the `<body>` element by def
 
 ##Demo
 
-You can view a demo of this here.
+You can view a demo of this ![here](http://dl.dropbox.com/u/4151695/html/jOrgChart/example/example.html "jQuery OrgChart").
 
 ------
 
 ##Sourcecode
 
-Source code with an example is available here.
+Source code with an example is available ![here](https://github.com/wesnolte/jOrgChart/tree/master/example "Example & Source").
 
 -----
 
