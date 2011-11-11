@@ -52,7 +52,7 @@ You'll need to construct a nest unordered list that represents your node nesting
 	</li>
 	</ul>
 
---Note that you can include any amount of HTML markup in your `<li>` **except** for other `<ul>` or `<li>` elements.--
+*Note that you can include any amount of HTML markup in your `<li>` **except** for other `<ul>` or `<li>` elements.*
 
 
 -----
