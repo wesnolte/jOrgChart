@@ -22,9 +22,9 @@
 			$('#list-html').toggle('fast', function(){
 				if($(this).is(':visible')){
 					$('#show-list').text('Hide underlying list.');
-					$(".topbar").fadeTo('fast',0.7);
+					$(".topbar").fadeTo('fast',0.9);
 				}else{
-					$('#show-list').text('View underlying list.');
+					$('#show-list').text('Show underlying list.');
 					$(".topbar").fadeTo('fast',1);					
 				}
 			});
@@ -39,12 +39,12 @@
 			<div class="container">
 				<a class="brand" href="#">jQuery Organisation Chart</a>
 				<ul class="nav">
-					<li><a href="#">Github</a></li>
-					<li><a href="#">Twitter</a></li>					
-					<li><a href="#">Blog</a></li>		
+					<li><a href="http://github.com/wesnolte">Github</a></li>
+					<li><a href="http://twitter.com/wesnolte">Twitter</a></li>					
+					<li><a href="http://th3silverlining.com">Blog</a></li>		
 				</ul>
 				<div class="pull-right">
-   					<div class="alert-message info" id="show-list">View underlying list.</div>
+   					<div class="alert-message info" id="show-list">Show underlying list.</div>
 					
 <pre class="prettyprint lang-html" id="list-html" style="display:none">&lt;ul id="org"&gt;
   &lt;li&gt;
@@ -54,7 +54,7 @@
       &lt;li&gt;Vegetables
         &lt;ul&gt;
           &lt;li&gt;Pumpkin&lt;/li&gt;
-          &lt;li&gt;Aubergine&lt;/li&gt;
+          &lt;li&gt;&lt;a href="http://tquila.com" target="_blank"&gt;Aubergine&lt;/a&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;Fruit
