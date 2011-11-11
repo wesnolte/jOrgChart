@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>jOrgChart - A jQuery OrgChart Plugin</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/jquery.jOrgChart.css"/>
+    <link rel="stylesheet" href="css/custom.css"/>
+	<link href="css/prettify.css" type="text/css" rel="stylesheet" />
+
+	<script type="text/javascript" src="prettify.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="jquery.jOrgChart.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+        $("#org").jOrgChart({
+			chartElement : '#chart'
+		});
+		
+		/* Extra Code */
+		$("#show-list").click(function(e){
+			e.preventDefault();
+			
+			$('#list-html').toggle('fast', function(){
+				if($(this).is(':visible')){
+					$('#show-list').text('Hide underlying list.');
+					$(".topbar").fadeTo('fast',0.7);
+				}else{
+					$('#show-list').text('View underlying list.');
+					$(".topbar").fadeTo('fast',1);					
+				}
+			});
+		});
+    });
+    </script>
+  </head>
+
+  <body onload="prettyPrint();">
+	<div class="topbar">
+		<div class="topbar-inner">
+			<div class="container">
+				<a class="brand" href="#">jQuery Organisation Chart</a>
+				<ul class="nav">
+					<li><a href="#">Github</a></li>
+					<li><a href="#">Twitter</a></li>					
+					<li><a href="#">Blog</a></li>		
+				</ul>
+				<div class="pull-right">
+   					<div class="alert-message info" id="show-list">View underlying list.</div>
+					
+<pre class="prettyprint lang-html" id="list-html" style="display:none">&lt;ul id="org"&gt;
+  &lt;li&gt;
+    Food
+    &lt;ul&gt;
+      &lt;li&gt;Beer&lt;/li&gt;
+      &lt;li&gt;Vegetables
+        &lt;ul&gt;
+          &lt;li&gt;Pumpkin&lt;/li&gt;
+          &lt;li&gt;Aubergine&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Fruit
+        &lt;ul&gt;
+          &lt;li&gt;Apple
+            &lt;ul&gt;
+              &lt;li&gt;Granny Smith&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;Berries
+            &lt;ul&gt;
+              &lt;li&gt;Blueberry&lt;/li&gt;
+              &lt;li&gt;Rasberry&lt;/li&gt;
+              &lt;li&gt;Cucumber&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Bread&lt;/li&gt;
+      &lt;li&gt;Chocolate
+        &lt;ul&gt;
+          &lt;li&gt;Topdeck&lt;/li&gt;
+          &lt;li&gt;Reese's Cups&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>		
+				</div>				
+			</div>
+		</div>
+	</div>
+	
+	<ul id="org" style="display:none">
+    <li>
+       Food
+       <ul>
+         <li>Beer</li>
+         <li>Vegetables
+           <ul>
+             <li>Pumpkin</li>
+             <li><a href="http://tquila.com" target="_blank">Aubergine</a></li>
+           </ul>
+         </li>
+         <li>Fruit
+           <ul>
+             <li>Apple
+               <ul>
+                 <li>Granny Smith</li>
+               </ul>
+             </li>
+             <li>Berries
+               <ul>
+                 <li>Blueberry</li>
+                 <li>Rasberry</li>
+                 <li>Cucumber</li>
+               </ul>
+             </li>
+           </ul>
+         </li>
+         <li>Bread</li>
+         <li>Chocolate
+           <ul>
+             <li>Topdeck</li>
+             <li>Reese's Cups</li>
+           </ul>
+         </li>
+       </ul>
+     </li>
+   </ul>			
+	
+	<div id="chart" class="orgChart"></div>
+
+</body></html>
