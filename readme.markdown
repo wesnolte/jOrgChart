@@ -71,13 +71,13 @@ This call will append the markup for the OrgChart to the `<body>` element by def
 
 ##Demo
 
-You can view a demo of this ![here](http://dl.dropbox.com/u/4151695/html/jOrgChart/example/example.html "jQuery OrgChart").
+You can view a demo of this [here](http://dl.dropbox.com/u/4151695/html/jOrgChart/example/example.html "jQuery OrgChart").
 
 ------
 
 ##Sourcecode
 
-Source code with an example is available ![here](https://github.com/wesnolte/jOrgChart/tree/master/example "Example & Source").
+Source code with an example is available [here](https://github.com/wesnolte/jOrgChart/tree/master/example "Example & Source").
 
 -----
 
@@ -85,6 +85,6 @@ Source code with an example is available ![here](https://github.com/wesnolte/jOr
 
 There are only 3 configuration options.
 
-1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to. -[default='body']-
-2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. -[default=-1]-
-3. **chartClass** - the name of the style class that is assigned to the generated markup. -[default='jOrgChart']-
+1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to. *[default='body']*
+2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. *[default=-1]*
+3. **chartClass** - the name of the style class that is assigned to the generated markup. *[default='jOrgChart']*
