@@ -5,7 +5,11 @@
 
 Follow me [@wesnolte](http://twitter.com/wesnolte)
 
-jQuery OrgChart is a plugin that allows you to render structures with nested elements in a easy-to-read tree structure. To build the tree all you need is to make a single line call to the plugin and supply the HTML element Id for a nested unordered list element that is representative of the data you'd like to display.
+jQuery OrgChart is a plugin that allows you to render structures with nested elements in a easy-to-read tree structure. To build the tree all you need is to make a single line call to the plugin and supply the HTML element Id for a nested unordered list element that is representative of the data you'd like to display. Features include:
+
+* Very easy to use given a nested unordered list element.
+* Showing/hiding a particular branch of the tree by click on the respective node.
+* Easy to style.
 
 ![jQuery OrgChart](http://i.imgur.com/2OpyG.png "jQuery OrgChart")
 
@@ -17,12 +21,16 @@ To get up and running you'll need a few things.
 
 -----
 
-###The JavaScript Libraries
+###The JavaScript Libraries & CSS
 
 You need to include the jQuery as well as the jOrgChart libraries. For example:
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	<script src="jquery.jOrgChart.js"></script>
+	
+The core CSS is necessary to perform some of the basic styling i.e.
+
+    <link rel="stylesheet" href="css/jquery.jOrgChart.css"/>
 
 ----
 
