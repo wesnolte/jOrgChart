@@ -1,3 +1,18 @@
+/**
+ * jQuery org-chart/tree plugin.
+ *
+ * Author: Wes Nolte
+ * http://www.tquila.com
+ *
+ * Based on the work of Mark Lee
+ * http://www.capricasoftware.co.uk 
+ *
+ * This software is licensed under the Creative Commons Attribution-ShareAlike
+ * 3.0 License.
+ *
+ * See here for license terms:
+ * http://creativecommons.org/licenses/by-sa/3.0
+ */
 (function($) {
 
   $.fn.jOrgChart = function(options) {
