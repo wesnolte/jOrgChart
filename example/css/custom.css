@@ -84,3 +84,9 @@ a:hover{
 	color 				: #F38630;
 	-moz-border-radius 	: 8px;
 }
+	.node p{
+		font-family 	: tahoma;
+		font-size 		: 10px;
+		line-height 	: 11px;
+		padding 		: 2px;
+	}

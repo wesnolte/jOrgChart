@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="prettify.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
     <script src="jquery.jOrgChart.js"></script>
+
     <script>
     jQuery(document).ready(function() {
         $("#org").jOrgChart({
@@ -46,15 +47,18 @@
 				<div class="pull-right">
    					<div class="alert-message info" id="show-list">Show underlying list.</div>
 					
-<pre class="prettyprint lang-html" id="list-html" style="display:none">&lt;ul id="org"&gt;
-  &lt;li&gt;
+<pre class="prettyprint lang-html" id="list-html" style="display:none">&lt;ul id="org" style="display:none"&gt;
+ &lt;li&gt;
     Food
     &lt;ul&gt;
       &lt;li&gt;Beer&lt;/li&gt;
       &lt;li&gt;Vegetables
         &lt;ul&gt;
           &lt;li&gt;Pumpkin&lt;/li&gt;
-          &lt;li&gt;&lt;a href="http://tquila.com" target="_blank"&gt;Aubergine&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;
+		&lt;a href="http://tquila.com" target="_blank"&gt;Aubergine&lt;/a&gt;
+		&lt;p&gt;A link and paragraph is all we need.&lt;/p&gt;
+	 &lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;Fruit
@@ -67,7 +71,7 @@
           &lt;li&gt;Berries
             &lt;ul&gt;
               &lt;li&gt;Blueberry&lt;/li&gt;
-              &lt;li&gt;Rasberry&lt;/li&gt;
+              &lt;li&gt;&lt;img src="images/raspberry.jpg" alt="Raspberry"/&gt;&lt;/li&gt;
               &lt;li&gt;Cucumber&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
@@ -96,7 +100,10 @@
          <li>Vegetables
            <ul>
              <li>Pumpkin</li>
-             <li><a href="http://tquila.com" target="_blank">Aubergine</a></li>
+             <li>
+				<a href="http://tquila.com" target="_blank">Aubergine</a>
+				<p>A link and paragraph is all we need.</p>
+			 </li>
            </ul>
          </li>
          <li>Fruit
@@ -109,7 +116,7 @@
              <li>Berries
                <ul>
                  <li>Blueberry</li>
-                 <li>Rasberry</li>
+                 <li><img src="images/raspberry.jpg" alt="Raspberry"/></li>
                  <li>Cucumber</li>
                </ul>
              </li>
