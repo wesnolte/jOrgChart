@@ -5,9 +5,12 @@
 
 Follow me [@wesnolte](http://twitter.com/wesnolte)
 
-jQuery OrgChart is a plugin that allows you to render structures with nested elements in a easy-to-read tree structure. To build the tree all you need is to make a single line call to the plugin and supply the HTML element Id for a nested unordered list element that is representative of the data you'd like to display. Features include:
+jQuery OrgChart is a plugin that allows you to render structures with nested elements in a easy-to-read tree structure. To build the tree all you need is to make a single line call to the plugin and supply the HTML element Id for a nested unordered list element that is representative of the data you'd like to display. If drag-and-drop is enabled you'll be able to reorder the tree which will also change the underlying list structure. 
+
+Features include:
 
 * Very easy to use given a nested unordered list element.
+* Drag-and-drop functionality allows reordering of the tree and underlying `ul`
 * Showing/hiding a particular branch of the tree by clicking on the respective node.
 * Nodes can contain any amount of HTML except `<li>` and `<ul>`.
 * Easy to style.
@@ -97,3 +100,4 @@ There are only 3 configuration options.
 1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to. *[default='body']*
 2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. *[default=-1]*
 3. **chartClass** - the name of the style class that is assigned to the generated markup. *[default='jOrgChart']*
+4. **dragAndDrop** - determines whether the drag-and-drop feature of tree node elements is enabled. *[default=false]*

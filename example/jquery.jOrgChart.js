@@ -2,7 +2,7 @@
  * jQuery org-chart/tree plugin.
  *
  * Author: Wes Nolte
- * http://www.tquila.com
+ * http://twitter.com/wesnolte
  *
  * Based on the work of Mark Lee
  * http://www.capricasoftware.co.uk 
@@ -19,25 +19,96 @@
     var opts = $.extend({}, $.fn.jOrgChart.defaults, options);
 	var $appendTo = $(opts.chartElement);
 
-    return this.each(function() {
-      $this = $(this);
-      var $container = $("<div class='" + opts.chartClass + "'/>");
-      if($this.is("ul")) {
-        buildNode($this.find("li:first"), $container, 0, opts);
-      }
-      else if($this.is("li")) {
-        buildNode($this, $container, 0, opts);
-      }
-      $appendTo.append($container);
-    });
+	// build the tree
+    $this = $(this);
+    var $container = $("<div class='" + opts.chartClass + "'/>");
+    if($this.is("ul")) {
+      buildNode($this.find("li:first"), $container, 0, opts);
+    }
+    else if($this.is("li")) {
+      buildNode($this, $container, 0, opts);
+    }
+    $appendTo.append($container);
+
+	// add drag and drop if enabled
+	if(opts.dragAndDrop){
+		$('.node').draggable({
+			cursor		: 'move',
+			distance	: 40,
+			helper 		: 'clone',
+			opacity		: 0.8,
+			revert 		: true,
+			revertDuration : 100,
+			snap		: 'div.node.expanded',
+			snapMode	: 'inner',
+			stack		: 'div.node',
+			start 		: handleDragStart,
+			stop		: handleDragStop
+		});
+		
+		$('.node').droppable({
+			accept 		: '.node',			
+			activeClass : 'drag-active',
+			drop		: handleDropEvent,
+			hoverClass	: 'drop-hover'
+		});
+		
+	  // Drag start event handler for nodes
+	  function handleDragStart( event, ui ){
+		
+		var sourceNode = $(this);
+		sourceNode.parentsUntil('.node-container')
+				   .find('*')
+				   .filter('.node')
+				   .droppable('disable');
+	  }
+
+	  // Drag stop event handler for nodes
+	  function handleDragStop( event, ui ){
+
+		/* reload the plugin */
+		$(opts.chartElement).children().remove();
+		$this.jOrgChart(opts);		
+	  }
+	
+	  // Drop event handler for nodes
+	  function handleDropEvent( event, ui ) {
+		console.log('handleDropEvent');		
+	    var sourceNode = ui.draggable;
+		var targetNode = $(this);
+		
+		var targetLi = $('li:contains("' + targetNode.html() +'")').last();
+		
+		var sourceliHtml = $('li:contains("' + sourceNode.html() +'")').last().clone();
+		var sourceLi = $('li:contains("' + sourceNode.html() +'")').last();
+		var sourceUl = sourceLi.parent('ul');
+		
+		if(sourceUl.children('li').size() > 1){
+			sourceLi.remove();			
+		}else{
+			sourceUl.remove();
+		}
+		
+		if(targetLi.children('ul').size() >0){
+			targetLi.children('ul').append('<li>'+sourceliHtml.html()+'</li>');		
+		}else{
+			targetLi.append('<ul><li>'+sourceliHtml.html()+'</li></ul>');					
+		}
+		
+	  } // handleDropEvent
+		
+	} // Drag and drop
   };
 
+  // Option defaults
   $.fn.jOrgChart.defaults = {
 	chartElement : 'body',
     depth      : -1,
-    chartClass : "jOrgChart"
+    chartClass : "jOrgChart",
+	dragAndDrop: false
   };
 
+  // Method that recursively builds the tree
   function buildNode($node, $appendTo, level, opts) {
 	
     var $table = $("<table cellpadding='0' cellspacing='0' border='0'/>");
@@ -53,9 +124,16 @@
     }
 	// Draw the node
 	// Get the contents - any markup except li and ul allowed
-	var $nodeContent = $node.clone().children("ul,li").remove().end().html();
+	var $nodeContent = $node.clone()
+							.children("ul,li")
+							.remove()
+						.end()
+						.html();
+						
     //var $heading = $("<h2>").text(nodeContent);
     $nodeDiv = $("<div>").addClass("node").append($nodeContent);
+//	$nodeDiv.data('markup',$node.html());
+
 
 	// Expand and contract nodes
     $nodeDiv.click(function() {
@@ -100,8 +178,12 @@
         });
 
 		// horizontal line shouldn't extend beyond the first and last child branches
-        $linesRow.find("td:first").removeClass("top");
-        $linesRow.find("td:last").removeClass("top");
+        $linesRow.find("td:first")
+					.removeClass("top")
+				 .end()
+				 .find("td:last")
+					.removeClass("top");
+
         $tbody.append($linesRow);
         var $childNodesRow = $("<tr/>");
         $childNodes.each(function() {

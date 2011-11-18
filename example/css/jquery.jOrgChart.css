@@ -35,4 +35,16 @@
   display               : inline-block;
   width                 : 96px;
   height                : 60px;
+  z-index 				: 10;
+}
+
+/* jQuery drag 'n drop */
+
+.drag-active {
+  border-style			: dotted !important;
+}
+
+.drop-hover {
+  border-style			: solid !important;
+  border-color 			: #E05E00 !important;
 }
