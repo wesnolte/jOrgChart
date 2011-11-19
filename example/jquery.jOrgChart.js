@@ -32,7 +32,7 @@
 
 	// add drag and drop if enabled
 	if(opts.dragAndDrop){
-		$('.node').draggable({
+		$('div.node').draggable({
 			cursor		: 'move',
 			distance	: 40,
 			helper 		: 'clone',
@@ -46,7 +46,7 @@
 			stop		: handleDragStop
 		});
 		
-		$('.node').droppable({
+		$('div.node').droppable({
 			accept 		: '.node',			
 			activeClass : 'drag-active',
 			drop		: handleDropEvent,
@@ -72,15 +72,33 @@
 	  }
 	
 	  // Drop event handler for nodes
-	  function handleDropEvent( event, ui ) {
-		console.log('handleDropEvent');		
+	  function handleDropEvent( event, ui ) {	
 	    var sourceNode = ui.draggable;
 		var targetNode = $(this);
 		
-		var targetLi = $('li:contains("' + targetNode.html() +'")').last();
+		// finding nodes based on plaintext and html
+		// content is hard!
+		var targetLi = $('li').filter(function(){
+			
+			li = $(this).clone()
+						.children("ul,li")
+						.remove()
+					.end();
+			
+			return li.html() == targetNode.html();
+		});		
 		
-		var sourceliHtml = $('li:contains("' + sourceNode.html() +'")').last().clone();
-		var sourceLi = $('li:contains("' + sourceNode.html() +'")').last();
+		var sourceLi = $('li').filter(function(){
+			
+			li = $(this).clone()
+						.children("ul,li")
+						.remove()
+					.end();
+			
+			return li.html() == sourceNode.html();
+		});
+		
+		var sourceliClone = sourceLi.clone();
 		var sourceUl = sourceLi.parent('ul');
 		
 		if(sourceUl.children('li').size() > 1){
@@ -90,9 +108,9 @@
 		}
 		
 		if(targetLi.children('ul').size() >0){
-			targetLi.children('ul').append('<li>'+sourceliHtml.html()+'</li>');		
+			targetLi.children('ul').append('<li>'+sourceliClone.html()+'</li>');		
 		}else{
-			targetLi.append('<ul><li>'+sourceliHtml.html()+'</li></ul>');					
+			targetLi.append('<ul><li>'+sourceliClone.html()+'</li></ul>');					
 		}
 		
 	  } // handleDropEvent
