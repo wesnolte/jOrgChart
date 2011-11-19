@@ -10,7 +10,7 @@ jQuery OrgChart is a plugin that allows you to render structures with nested ele
 Features include:
 
 * Very easy to use given a nested unordered list element.
-* Drag-and-drop functionality allows reordering of the tree and underlying `ul`
+* Drag-and-drop functionality allows reordering of the tree and underlying `<ul>` structure.
 * Showing/hiding a particular branch of the tree by clicking on the respective node.
 * Nodes can contain any amount of HTML except `<li>` and `<ul>`.
 * Easy to style.
@@ -29,8 +29,12 @@ To get up and running you'll need a few things.
 
 You need to include the jQuery as well as the jOrgChart libraries. For example:
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<script src="jquery.jOrgChart.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.jOrgChart.js"></script>
+	
+If you want to use the drag-and-drop functionality you'll need to include jQuery UI too:
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 	
 The core CSS is necessary to perform some of the basic styling i.e.
 
