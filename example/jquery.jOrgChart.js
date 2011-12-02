@@ -35,44 +35,41 @@
 		$('div.node').draggable({
 			cursor		: 'move',
 			distance	: 40,
-			helper 		: 'clone',
+			helper      : 'clone',
 			opacity		: 0.8,
-			revert 		: true,
+			revert      : true,
 			revertDuration : 100,
 			snap		: 'div.node.expanded',
 			snapMode	: 'inner',
-			stack		: 'div.node',
-			start 		: handleDragStart,
-			stop		: handleDragStop
+			stack		: 'div.node'
 		});
 		
 		$('div.node').droppable({
-			accept 		: '.node',			
+			accept      : '.node',			
 			activeClass : 'drag-active',
-			drop		: handleDropEvent,
 			hoverClass	: 'drop-hover'
 		});
 		
 	  // Drag start event handler for nodes
-	  function handleDragStart( event, ui ){
+	  $('div.node').bind("dragstart", function handleDragStart( event, ui ){
 		
 		var sourceNode = $(this);
 		sourceNode.parentsUntil('.node-container')
 				   .find('*')
 				   .filter('.node')
 				   .droppable('disable');
-	  }
+	  });
 
 	  // Drag stop event handler for nodes
-	  function handleDragStop( event, ui ){
+	  $('div.node').bind("dragstop", function handleDragStop( event, ui ){
 
 		/* reload the plugin */
 		$(opts.chartElement).children().remove();
 		$this.jOrgChart(opts);		
-	  }
+	  });
 	
 	  // Drop event handler for nodes
-	  function handleDropEvent( event, ui ) {	
+	  $('div.node').bind("drop", function handleDropEvent( event, ui ) {	
 	    var sourceNode = ui.draggable;
 		var targetNode = $(this);
 		
@@ -113,7 +110,7 @@
 			targetLi.append('<ul><li>'+sourceliClone.html()+'</li></ul>');					
 		}
 		
-	  } // handleDropEvent
+	  }); // handleDropEvent
 		
 	} // Drag and drop
   };
@@ -148,10 +145,7 @@
 						.end()
 						.html();
 						
-    //var $heading = $("<h2>").text(nodeContent);
     $nodeDiv = $("<div>").addClass("node").append($nodeContent);
-//	$nodeDiv.data('markup',$node.html());
-
 
 	// Expand and contract nodes
     $nodeDiv.click(function() {
