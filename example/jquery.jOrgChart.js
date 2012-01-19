@@ -17,7 +17,7 @@
 
   $.fn.jOrgChart = function(options) {
     var opts = $.extend({}, $.fn.jOrgChart.defaults, options);
-	var $appendTo = $(opts.chartElement);
+    var $appendTo = $(opts.chartElement);
 
 	// build the tree
     $this = $(this);
@@ -184,8 +184,8 @@
         // Draw the horizontal lines
         var $linesRow = $("<tr/>");
         $childNodes.each(function() {
-          var $left = $("<td/>").addClass("line left top");
-          var $right = $("<td/>").addClass("line right top");
+          var $left = $("<td>&nbsp;</td>").addClass("line left top");
+          var $right = $("<td>&nbsp;</td>").addClass("line right top");
           $linesRow.append($left).append($right);
         });
 
@@ -205,8 +205,13 @@
            buildNode($(this), $td, level+1, opts);
            $childNodesRow.append($td);
         });
+
       }
       $tbody.append($childNodesRow);
+    }
+
+    if ($node.hasClass('collapsed')) {
+        $nodeRow.nextAll('tr').css('display', 'none');
     }
 
     $table.append($tbody);
