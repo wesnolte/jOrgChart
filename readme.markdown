@@ -14,6 +14,7 @@ Features include:
 * Showing/hiding a particular branch of the tree by clicking on the respective node.
 * Nodes can contain any amount of HTML except `<li>` and `<ul>`.
 * Easy to style.
+* You can specify that sub-trees should start collapsed, which is useful for very large trees
 
 ![jQuery OrgChart](http://i.imgur.com/2OpyG.png "jQuery OrgChart")
 
@@ -67,6 +68,23 @@ You'll need to construct a nest unordered list that represents your node nesting
 	  </ul>
 	</li>
 	</ul>
+
+If you want a sub-tree to start off hiden, just add `class="collapsed"` to a list item (`<li>`). That list item will appear, but everything below it won't. For example:
+
+	<ul id="org" style="display:none">
+      <li>Food:
+        <ul>
+          <li>Beer</li>
+          <li class=collapsed>Vegetables
+            <ul>
+              <li>Carrot</li>
+              <li>Pea</li>
+            </ul>
+          </li>
+          <li>Chocolate</li>
+        </ul>
+      </li>
+    </ul>
 
 *Note that you can include any amount of HTML markup in your `<li>` **except** for other `<ul>` or `<li>` elements.*
 
