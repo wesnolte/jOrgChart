@@ -184,8 +184,8 @@
         // Draw the horizontal lines
         var $linesRow = $("<tr/>");
         $childNodes.each(function() {
-          var $left = $("<td/>").addClass("line left top");
-          var $right = $("<td/>").addClass("line right top");
+          var $left = $("<td>&nbsp;</td>").addClass("line left top");
+          var $right = $("<td>&nbsp;</td>").addClass("line right top");
           $linesRow.append($left).append($right);
         });
 
