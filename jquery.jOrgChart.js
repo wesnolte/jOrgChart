@@ -205,8 +205,13 @@
            buildNode($(this), $td, level+1, opts);
            $childNodesRow.append($td);
         });
+
       }
       $tbody.append($childNodesRow);
+    }
+
+    if ($node.hasClass('collapsed')) {
+        $nodeRow.nextAll('tr').css('display', 'none');
     }
 
     $table.append($tbody);
