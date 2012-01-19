@@ -26,7 +26,7 @@
 .jOrgChart td {
   text-align            : center;
   vertical-align        : top;
-  padding               : 0px 2px;
+  padding               : 0;
 }
 
 /* The node */
