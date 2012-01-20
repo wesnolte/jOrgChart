@@ -86,7 +86,7 @@ If you want a sub-tree to start off hidden, just add `class="collapsed"` to a li
       </li>
     </ul>
 
-*Note that you can include any amount of HTML markup in your `<li>` **except** for other `<ul>` or `<li>` elements.*
+This plugin works by generating the tree as a series of nested tables. Each node in the tree is represented with `<div class="node">`. You can include any amount of HTML markup in your `<li>` **except** for other `<ul>` or `<li>` elements. Your markup will be used within the node's `<div>` element. Any classes you attach to the `<li>` elements will be copied to the associated node, allowing you to highlight particular parts of the tree. The special `collapsed` class described above doesn't get copied to the node.
 
 
 -----

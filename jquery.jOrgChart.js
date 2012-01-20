@@ -133,6 +133,7 @@
     var $nodeRow = $("<tr/>").addClass("node-cells");
     var $nodeCell = $("<td/>").addClass("node-cell").attr("colspan", 2);
     var $childNodes = $node.children("ul:first").children("li");
+    var $nodeDiv;
 	
     if($childNodes.length > 1) {
       $nodeCell.attr("colspan", $childNodes.length * 2);
@@ -210,8 +211,17 @@
       $tbody.append($childNodesRow);
     }
 
-    if ($node.hasClass('collapsed')) {
-        $nodeRow.nextAll('tr').css('display', 'none');
+    // any classes on the LI element get copied to the relevant node in the tree
+    // apart from the special 'collapsed' class, which collapses the sub-tree at this point
+    if ($node.attr('class') != undefined) {
+        var classList = $node.attr('class').split(/\s+/);
+        $.each(classList, function(index,item) {
+            if (item == 'collapsed') {
+                $nodeRow.nextAll('tr').css('display', 'none');
+            } else {
+                $nodeDiv.addClass(item);
+            }
+        });
     }
 
     $table.append($tbody);
