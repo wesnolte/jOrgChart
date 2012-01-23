@@ -149,19 +149,23 @@
     $nodeDiv = $("<div>").addClass("node").append($nodeContent);
 
 	// Expand and contract nodes
-    $nodeDiv.click(function() {
-      var $this = $(this);
-      var $tr = $this.closest("tr");
-      $tr.nextAll("tr").fadeToggle("fast");
+    if ($childNodes.length > 0) {
+      $nodeDiv.click(function() {
+         var $this = $(this);
+         var $tr = $this.closest("tr");
+         $tr.nextAll("tr").fadeToggle("fast");
 
-	  if($tr.hasClass('contracted')){
-		$this.css('cursor','n-resize');
-		$tr.addClass('expanded');
-	  }else{
-		$this.css('cursor','s-resize');
-		$tr.addClass('contracted');
-	  }
-    });
+         if($tr.hasClass('contracted')){
+           $this.css('cursor','n-resize');
+           $tr.removeClass('contracted');
+           $tr.addClass('expanded');
+         }else{
+           $this.css('cursor','s-resize');
+           $tr.removeClass('expanded');
+           $tr.addClass('contracted');
+         }
+      });
+    }
 	
     $nodeCell.append($nodeDiv);
     $nodeRow.append($nodeCell);
@@ -218,6 +222,9 @@
         $.each(classList, function(index,item) {
             if (item == 'collapsed') {
                 $nodeRow.nextAll('tr').css('display', 'none');
+                $nodeRow.removeClass('expanded');
+                $nodeRow.addClass('contracted');
+                $nodeDiv.css('cursor','s-resize');
             } else {
                 $nodeDiv.addClass(item);
             }
