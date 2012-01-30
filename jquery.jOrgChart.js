@@ -7,6 +7,8 @@
  * Based on the work of Mark Lee
  * http://www.capricasoftware.co.uk 
  *
+ * ID implementation by Aleks Drevenšek
+ *
  * This software is licensed under the Creative Commons Attribution-ShareAlike
  * 3.0 License.
  *
@@ -82,7 +84,7 @@
 						.remove()
 					.end();
 			
-			return li.html() == targetNode.html();
+			return li.attr("id")==targetNode.attr("id");
 		});		
 		
 		var sourceLi = $('li').filter(function(){
@@ -92,7 +94,7 @@
 						.remove()
 					.end();
 			
-			return li.html() == sourceNode.html();
+			return li.attr("id")==sourceNode.attr("id");
 		});
 		
 		var sourceliClone = sourceLi.clone();
@@ -104,10 +106,11 @@
 			sourceUl.remove();
 		}
 		
+		var id = sourceLi.attr("id");
 		if(targetLi.children('ul').size() >0){
-			targetLi.children('ul').append('<li>'+sourceliClone.html()+'</li>');		
+			targetLi.children('ul').append('<li id="'+id+'">'+sourceliClone.html()+'</li>');		
 		}else{
-			targetLi.append('<ul><li>'+sourceliClone.html()+'</li></ul>');					
+			targetLi.append('<ul><li id="'+id+'">'+sourceliClone.html()+'</li></ul>');					
 		}
 		
 	  }); // handleDropEvent
@@ -146,7 +149,7 @@
 						.end()
 						.html();
 						
-    $nodeDiv = $("<div>").addClass("node").append($nodeContent);
+    $nodeDiv = $("<div>").addClass("node").attr("id", $node.attr("id")).append($nodeContent);
 
 	// Expand and contract nodes
     $nodeDiv.click(function() {
