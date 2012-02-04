@@ -152,14 +152,15 @@
     $nodeDiv.click(function() {
       var $this = $(this);
       var $tr = $this.closest("tr");
-      $tr.nextAll("tr").fadeToggle("fast");
 
 	  if($tr.hasClass('contracted')){
 		$this.css('cursor','n-resize');
-		$tr.addClass('expanded');
+		$tr.removeClass('contracted').addClass('expanded');
+        $tr.nextAll("tr").css('visibility', '');
 	  }else{
 		$this.css('cursor','s-resize');
-		$tr.addClass('contracted');
+		$tr.removeClass('expanded').addClass('contracted');
+        $tr.nextAll("tr").css('visibility', 'hidden');
 	  }
     });
 	
