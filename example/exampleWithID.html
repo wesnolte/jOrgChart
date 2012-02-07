@@ -7,18 +7,19 @@
 	<link href="css/prettify.css" type="text/css" rel="stylesheet" />
 
 	<script type="text/javascript" src="prettify.js"></script>
-
+	
 	<!-- jQuery includes -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-
+	
     <script src="jquery.jOrgChart.js"></script>
 
     <script>
     jQuery(document).ready(function() {
         $("#org").jOrgChart({
 			chartElement : '#chart',
-			dragAndDrop  : true
+			dragAndDrop  : true,
+			useID: true
 		});
     });
     </script>
@@ -36,54 +37,44 @@
 				</ul>
 				<div class="pull-right">
    					<div class="alert-message info" id="show-list">Show underlying list.</div>
-
+					
 <pre class="prettyprint lang-html" id="list-html" style="display:none"></pre>		
 				</div>				
 			</div>
 		</div>
 	</div>
-
+	
 	<ul id="org" style="display:none">
-    <li>
-       Food
-       <ul>
-         <li>Beer</li>
-         <li>Vegetables
-           <ul>
-             <li>Pumpkin</li>
-             <li>
-				<a href="http://tquila.com" target="_blank">Aubergine</a>
-				<p>A link and paragraph is all we need.</p>
-			 </li>
-           </ul>
-         </li>
-         <li>Fruit
-           <ul>
-             <li>Apple
-               <ul>
-                 <li>Granny Smith</li>
-               </ul>
-             </li>
-             <li>Berries
-               <ul>
-                 <li>Blueberry</li>
-                 <li><img src="images/raspberry.jpg" alt="Raspberry"/></li>
-                 <li>Cucumber</li>
-               </ul>
-             </li>
-           </ul>
-         </li>
-         <li>Bread</li>
-         <li>Chocolate
-           <ul>
-             <li>Topdeck</li>
-             <li>Reese's Cups</li>
-           </ul>
-         </li>
-       </ul>
-     </li>
-   </ul>			
-
+		<li id="fruits">Fruits
+			<ul>
+				<li id="Citrus">Citrus
+					<ul>
+						<li id="Orange">Orange
+							<ul>
+								<li id="vitC-orange">Vitamin C</li>
+								<li id="calcium-orange">Calcium</li>
+								<li id="iron-orange">Iron</li>
+							</ul>
+						</li>
+						<li id="Lemon">Lemon
+							<ul>
+								<li id="vitC-lemon">Vitamin C</li>
+								<li id="calcium-lemon">Calcium</li>
+								<li id="iron-lemon">Iron</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li id="Raspberry"><img src="images/raspberry.jpg" alt="Raspberry">
+					<ul>
+						<li id="vitC-rasp">Vitamin C</li>
+						<li id="sodium-rasp">Sodium</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>			
+	
 	<div id="chart" class="orgChart"></div>
     
     <script>

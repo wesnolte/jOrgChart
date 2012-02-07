@@ -7,6 +7,8 @@
  * Based on the work of Mark Lee
  * http://www.capricasoftware.co.uk 
  *
+ * ID implementation by Aleks Drevenšek
+ *
  * This software is licensed under the Creative Commons Attribution-ShareAlike
  * 3.0 License.
  *
@@ -81,8 +83,12 @@
 						.children("ul,li")
 						.remove()
 					.end();
-			
-			return li.html() == targetNode.html();
+					
+			if(opts.useID){
+				return li.attr("id")==targetNode.attr("id");
+			}else{
+				return li.html() == targetNode.html();
+			}
 		});		
 		
 		var sourceLi = $('li').filter(function(){
@@ -92,7 +98,11 @@
 						.remove()
 					.end();
 			
-			return li.html() == sourceNode.html();
+			if(opts.useID){
+				return li.attr("id")==sourceNode.attr("id");
+			}else{
+				return li.html() == sourceNode.html();
+			}
 		});
 		
 		var sourceliClone = sourceLi.clone();
@@ -104,10 +114,21 @@
 			sourceUl.remove();
 		}
 		
+		
 		if(targetLi.children('ul').size() >0){
-			targetLi.children('ul').append('<li>'+sourceliClone.html()+'</li>');		
+			if(opts.useID){
+				var id = sourceLi.attr("id");
+				targetLi.children('ul').append('<li id="'+id+'">'+sourceliClone.html()+'</li>');
+			}else{
+				targetLi.children('ul').append('<li>'+sourceliClone.html()+'</li>');
+			}
 		}else{
-			targetLi.append('<ul><li>'+sourceliClone.html()+'</li></ul>');					
+			if(opts.useID){
+				var id = sourceLi.attr("id");
+				targetLi.append('<ul><li id="'+id+'">'+sourceliClone.html()+'</li></ul>');
+			}else{
+				targetLi.append('<ul><li>'+sourceliClone.html()+'</li></ul>');
+			}
 		}
 		
 	  }); // handleDropEvent
@@ -120,7 +141,8 @@
 	chartElement : 'body',
     depth      : -1,
     chartClass : "jOrgChart",
-	dragAndDrop: false
+	dragAndDrop: false,
+	useID	   : false
   };
 
   // Method that recursively builds the tree
@@ -128,6 +150,15 @@
 	
     var $table = $("<table cellpadding='0' cellspacing='0' border='0'/>");
     var $tbody = $("<tbody/>");
+	
+	// Checks if IDs are allowed and if they are given, else creates new ID
+	if(opts.useID){
+		var id = $node.attr("id");
+		if(id == undefined){
+			id = Math.random()+"_"+new Date().getTime();
+			$node.attr("id", id);
+		}
+	}
 
 	// Construct the node container(s)
     var $nodeRow = $("<tr/>").addClass("node-cells");
@@ -145,8 +176,13 @@
 							.remove()
 						.end()
 						.html();
-						
-    $nodeDiv = $("<div>").addClass("node").append($nodeContent);
+	
+	// If user wants to use ids adds id to a new div.
+	if(opts.useID){
+		$nodeDiv = $("<div>").addClass("node").attr("id", $node.attr("id")).append($nodeContent);
+	}else{
+		$nodeDiv = $("<div>").addClass("node").append($nodeContent);
+	}
 
 	// Expand and contract nodes
     if ($childNodes.length > 0) {
