@@ -7,9 +7,7 @@
 * Based on the work of Mark Lee
 * http://www.capricasoftware.co.uk
 *
-* ID implementation by Aleks Drevenšek
-*
-* ID implementation fixed(changed) by Adrian Hinz
+* ID implementation fixed by Adrian Hinz
 * 
 * This software is licensed under the Creative Commons Attribution-ShareAlike
 * 3.0 License.
