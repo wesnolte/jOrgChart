@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>jOrgChart - A jQuery OrgChart Plugin</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/jquery.jOrgChart.css"/>
+    <link rel="stylesheet" href="css/custom.css"/>
+    <link href="css/prettify.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="prettify.js"></script>
+    
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    
+    <script src="jquery.jOrgChart.js"></script>
+
+    <script>
+    jQuery(document).ready(function() {
+        $("#org").jOrgChart({
+            chartElement : '#chart',
+            dragAndDrop  : true,
+            highlightParent: true
+        });
+    });
+    </script>
+  </head>
+
+  <body onload="prettyPrint();">
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="container">
+                <a class="brand" href="#">jQuery Organisation Chart</a>
+                <ul class="nav">
+                    <li><a href="http://github.com/wesnolte">Github</a></li>
+                    <li><a href="http://twitter.com/wesnolte">Twitter</a></li>                  
+                    <li><a href="http://th3silverlining.com">Blog</a></li>      
+                </ul>
+                <div class="pull-right">
+                    <div class="alert-message info" id="show-list">Show underlying list.</div>
+                    
+<pre class="prettyprint lang-html" id="list-html" style="display:none"></pre>       
+                </div>              
+            </div>
+        </div>
+    </div>
+    
+    <ul id="org" style="display:none">
+    <li>
+       Food
+       <ul>
+         <li id="beer">Beer</li>
+         <li>Vegetables
+           <a href="http://wesnolte.com" target="_blank">Click me</a>
+           <ul>
+             <li>Pumpkin</li>
+             <li>
+                <a href="http://tquila.com" target="_blank">Aubergine</a>
+                <p>A link and paragraph is all we need.</p>
+             </li>
+           </ul>
+         </li>
+         <li class="candy">Candy
+           <ul>
+             <li>Gumballs</li>
+             <li>Jawbreakers</li>
+           </ul>
+         </li>
+         <li class="fruit">Fruit
+           <ul>
+             <li>Apple
+               <ul>
+                 <li>Granny Smith</li>
+               </ul>
+             </li>
+             <li>Berries
+               <ul>
+                 <li>Blueberry</li>
+                 <li><img src="images/raspberry.jpg" alt="Raspberry"/></li>
+                 <li>Cucumber</li>
+               </ul>
+             </li>
+           </ul>
+         </li>
+         <li>Bread</li>
+         <li>Chocolate
+           <ul>
+             <li>Topdeck</li>
+             <li>Reese's Cups</li>
+           </ul>
+         </li>
+       </ul>
+     </li>
+   </ul>            
+    
+    <div id="chart" class="orgChart"></div>
+    
+    <script>
+        jQuery(document).ready(function() {
+            
+            /* Custom jQuery for the example */
+            $("#show-list").click(function(e){
+                e.preventDefault();
+                
+                $('#list-html').toggle('fast', function(){
+                    if($(this).is(':visible')){
+                        $('#show-list').text('Hide underlying list.');
+                        $(".topbar").fadeTo('fast',0.9);
+                    }else{
+                        $('#show-list').text('Show underlying list.');
+                        $(".topbar").fadeTo('fast',1);                  
+                    }
+                });
+            });
+            
+            $('#list-html').text($('#org').html());
+            
+            $("#org").bind("DOMSubtreeModified", function() {
+                $('#list-html').text('');
+                
+                $('#list-html').text($('#org').html());
+                
+                prettyPrint();                
+            });
+        });
+    </script>
+
+</body>
+</html>

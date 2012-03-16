@@ -28,6 +28,37 @@
     }
     $appendTo.append($container);
 
+    // add highlight event if enabled
+    if(opts.highlightParent){
+        $('div.node').hover(function(){
+            var $this = $(this),
+                $nodec = $this.closest('.node-container'),
+                ix = $nodec.index(),
+                start = ix;
+                count = $nodec.parent().children().length,
+                $tr = $nodec.closest('tr'),
+                lvl = $tr.index(),
+                $linkup = $tr.siblings().eq(lvl-2),
+                $linkover = $tr.siblings().eq(lvl-1);
+
+            if (ix > count / 2 || (!(count%2) && ix == count/2)) {
+                $linkover.children().slice(count,2*ix+1).addClass('top-hl');
+            } else if (ix < count / 2 && !(count%2 && ix == (count-1)/2)) {
+                $linkover.children().slice(2*ix+1, count+1).addClass('top-hl');
+            }
+            $linkover.children().eq(2*ix+1).addClass('right-hl');
+            $linkover.children().eq(2*ix).addClass('left-hl');
+            $('.line.down', $linkup).addClass('highlighted');
+        }, function(){
+            var $this = $(this),
+                $nodec = $this.closest('.node-container'),
+                $table = $nodec.closest('table');
+            $('.highlighted', $table).removeClass('highlighted');
+            $('.top-hl', $table).removeClass('top-hl');
+            $('.left-hl', $table).removeClass('left-hl');
+            $('.right-hl', $table).removeClass('right-hl');
+        });
+    }
     // add drag and drop if enabled
     if(opts.dragAndDrop){
         $('div.node').draggable({
@@ -140,7 +171,8 @@
     chartElement : 'body',
     depth      : -1,
     chartClass : "jOrgChart",
-    dragAndDrop: false
+    dragAndDrop: false,
+    highlightParent : false
   };
 
   // Method that recursively builds the tree
