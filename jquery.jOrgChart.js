@@ -147,7 +147,6 @@
 
   // Method that recursively builds the tree
   function buildNode($node, $appendTo, level, opts) {
-    
     var $table = $("<table cellpadding='0' cellspacing='0' border='0'/>");
     var $tbody = $("<tbody/>");
 
@@ -168,7 +167,7 @@
                         .end()
                         .html();
                         
-    var new_node_id = $node.attr("id")
+    var new_node_id = $node.attr("id");
     if (typeof new_node_id !== 'undefined' && new_node_id !== false) {
         $nodeDiv = $("<div>").addClass("node").attr("id", $node.attr("id")).append($nodeContent);
     }else{
@@ -178,20 +177,20 @@
     // Expand and contract nodes
     if ($childNodes.length > 0) {
       $nodeDiv.click(function() {
-      var $this = $(this);
-      var $tr = $this.closest("tr");
+          var $this = $(this);
+          var $tr = $this.closest("tr");
 
-      if($tr.hasClass('contracted')){
-        $this.css('cursor','n-resize');
-        $tr.removeClass('contracted').addClass('expanded');
-        $tr.nextAll("tr").css('visibility', '');
-      }else{
-        $this.css('cursor','s-resize');
-        $tr.removeClass('expanded').addClass('contracted');
-        $tr.nextAll("tr").css('visibility', 'hidden');
-      }
-    });
-        }
+          if($tr.hasClass('contracted')){
+            $this.css('cursor','n-resize');
+            $tr.removeClass('contracted').addClass('expanded');
+            $tr.nextAll("tr").css('visibility', '');
+          }else{
+            $this.css('cursor','s-resize');
+            $tr.removeClass('expanded').addClass('contracted');
+            $tr.nextAll("tr").css('visibility', 'hidden');
+          }
+        });
+    }
     
     $nodeCell.append($nodeDiv);
     $nodeRow.append($nodeCell);
@@ -259,6 +258,12 @@
 
     $table.append($tbody);
     $appendTo.append($table);
+    
+    /* Prevent trees collapsing if a link inside a node is clicked */
+    $nodeDiv.children('a').click(function(e){
+        console.log(e);
+        e.stopPropagation();
+    });
   };
 
 })(jQuery);
