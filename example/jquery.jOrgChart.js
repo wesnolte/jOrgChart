@@ -16,6 +16,10 @@
   $.fn.jOrgChart = function(options) {
     var opts = $.extend({}, $.fn.jOrgChart.defaults, options);
     var $appendTo = $(opts.chartElement);
+    var callbackFunction = opts.cb;
+    if (typeof callbackFunction != 'function') {
+        callbackFunction = $.noop;
+    }
 
     // build the tree
     $this = $(this);
