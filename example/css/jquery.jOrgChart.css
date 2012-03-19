@@ -22,6 +22,26 @@
   border-left           : 2px solid black;
 }
 
+.jOrgChart .line.highlighted {
+  border-color: yellow;
+}
+
+.jOrgChart .line.down.highlighted {
+  background-color: yellow;
+}
+
+.jOrgChart .line.right-hl {
+  border-left: 2px solid yellow;
+}
+
+.jOrgChart .line.left-hl {
+  border-right: 2px solid yellow;
+}
+
+.jOrgChart .line.top-hl {
+  border-top: 3px solid yellow;
+}
+
 /* node cell */
 .jOrgChart td {
   text-align            : center;

@@ -16,6 +16,10 @@
   $.fn.jOrgChart = function(options) {
     var opts = $.extend({}, $.fn.jOrgChart.defaults, options);
     var $appendTo = $(opts.chartElement);
+    var callbackFunction = opts.cb;
+    if (typeof callbackFunction != 'function') {
+        callbackFunction = $.noop;
+    }
 
     // build the tree
     $this = $(this);
@@ -28,6 +32,37 @@
     }
     $appendTo.append($container);
 
+    // add highlight event if enabled
+    if(opts.highlightParent){
+        $('div.node').hover(function(){
+            var $this = $(this),
+                $nodec = $this.closest('.node-container'),
+                ix = $nodec.index(),
+                start = ix;
+                count = $nodec.parent().children().length,
+                $tr = $nodec.closest('tr'),
+                lvl = $tr.index(),
+                $linkup = $tr.siblings().eq(lvl-2),
+                $linkover = $tr.siblings().eq(lvl-1);
+
+            if (ix > count / 2 || (!(count%2) && ix == count/2)) {
+                $linkover.children().slice(count,2*ix+1).addClass('top-hl');
+            } else if (ix < count / 2 && !(count%2 && ix == (count-1)/2)) {
+                $linkover.children().slice(2*ix+1, count+1).addClass('top-hl');
+            }
+            $linkover.children().eq(2*ix+1).addClass('right-hl');
+            $linkover.children().eq(2*ix).addClass('left-hl');
+            $('.line.down', $linkup).addClass('highlighted');
+        }, function(){
+            var $this = $(this),
+                $nodec = $this.closest('.node-container'),
+                $table = $nodec.closest('table');
+            $('.highlighted', $table).removeClass('highlighted');
+            $('.top-hl', $table).removeClass('top-hl');
+            $('.left-hl', $table).removeClass('left-hl');
+            $('.right-hl', $table).removeClass('right-hl');
+        });
+    }
     // add drag and drop if enabled
     if(opts.dragAndDrop){
         $('div.node').draggable({
@@ -140,7 +175,8 @@
     chartElement : 'body',
     depth      : -1,
     chartClass : "jOrgChart",
-    dragAndDrop: false
+    dragAndDrop: false,
+    highlightParent : false
   };
 
   // Method that recursively builds the tree
@@ -154,6 +190,11 @@
     var $childNodes = $node.children("ul:first").children("li");
     var $nodeDiv;
     
+    var callbackFunction = opts.cb;
+    if (typeof callbackFunction != 'function') {
+        callbackFunction = $.noop;
+    }
+
     if($childNodes.length > 1) {
       $nodeCell.attr("colspan", $childNodes.length * 2);
     }
@@ -173,7 +214,7 @@
     }
 
     // Expand and contract nodes
-    if ($childNodes.length > 0) {
+    if ($childNodes.length > 0 && opts.collapse !== false) {
       $nodeDiv.click(function() {
           var $this = $(this);
           var $tr = $this.closest("tr");
@@ -195,9 +236,10 @@
     $tbody.append($nodeRow);
 
     if($childNodes.length > 0) {
-      // if it can be expanded then change the cursor
-      $nodeDiv.css('cursor','n-resize').addClass('expanded');
-    
+      if (opts.collapse !== false) {
+        // if it can be expanded then change the cursor
+        $nodeDiv.css('cursor','n-resize').addClass('expanded');
+      }
       // recurse until leaves found (-1) or to the level specified
       if(opts.depth == -1 || (level+1 < opts.depth)) { 
         var $downLineRow = $("<tr/>");
@@ -257,11 +299,13 @@
     $table.append($tbody);
     $appendTo.append($table);
     
-    /* Prevent trees collapsing if a link inside a node is clicked */
-    $nodeDiv.children('a').click(function(e){
+    /* Prevent trees collapsing if a link, button, or input inside a node is clicked */
+    $nodeDiv.children('a, button, input').click(function(e){
         console.log(e);
         e.stopPropagation();
     });
+
+    callbackFunction($nodeDiv, level);
   };
 
 })(jQuery);
