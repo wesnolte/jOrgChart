@@ -290,8 +290,8 @@
     $table.append($tbody);
     $appendTo.append($table);
     
-    /* Prevent trees collapsing if a link inside a node is clicked */
-    $nodeDiv.children('a').click(function(e){
+    /* Prevent trees collapsing if a link, button, or input inside a node is clicked */
+    $nodeDiv.children('a, button, input').click(function(e){
         console.log(e);
         e.stopPropagation();
     });
