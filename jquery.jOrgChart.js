@@ -205,7 +205,7 @@
     }
 
     // Expand and contract nodes
-    if ($childNodes.length > 0) {
+    if ($childNodes.length > 0 && opts.collapse) {
       $nodeDiv.click(function() {
           var $this = $(this);
           var $tr = $this.closest("tr");
@@ -227,9 +227,10 @@
     $tbody.append($nodeRow);
 
     if($childNodes.length > 0) {
-      // if it can be expanded then change the cursor
-      $nodeDiv.css('cursor','n-resize').addClass('expanded');
-    
+      if (opts.collapse) {
+        // if it can be expanded then change the cursor
+        $nodeDiv.css('cursor','n-resize').addClass('expanded');
+      }
       // recurse until leaves found (-1) or to the level specified
       if(opts.depth == -1 || (level+1 < opts.depth)) { 
         var $downLineRow = $("<tr/>");
