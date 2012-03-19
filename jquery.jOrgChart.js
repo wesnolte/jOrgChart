@@ -305,7 +305,7 @@
         e.stopPropagation();
     });
 
-    callbackFunction($nodeDiv);
+    callbackFunction($nodeDiv, level);
   };
 
 })(jQuery);
