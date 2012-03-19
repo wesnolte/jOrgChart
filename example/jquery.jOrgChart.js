@@ -16,10 +16,6 @@
   $.fn.jOrgChart = function(options) {
     var opts = $.extend({}, $.fn.jOrgChart.defaults, options);
     var $appendTo = $(opts.chartElement);
-    var callbackFunction = opts.cb;
-    if (typeof callbackFunction != 'function') {
-        callbackFunction = $.noop;
-    }
 
     // build the tree
     $this = $(this);
@@ -190,6 +186,11 @@
     var $childNodes = $node.children("ul:first").children("li");
     var $nodeDiv;
     
+    var callbackFunction = opts.cb;
+    if (typeof callbackFunction != 'function') {
+        callbackFunction = $.noop;
+    }
+
     if($childNodes.length > 1) {
       $nodeCell.attr("colspan", $childNodes.length * 2);
     }

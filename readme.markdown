@@ -117,9 +117,12 @@ Source code with an example is available [here](https://github.com/wesnolte/jOrg
 
 ##Configuration
 
-There are only 3 configuration options.
+There are 7 configuration options.
 
 1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to. *[default='body']*
 2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. *[default=-1]*
 3. **chartClass** - the name of the style class that is assigned to the generated markup. *[default='jOrgChart']*
 4. **dragAndDrop** - determines whether the drag-and-drop feature of tree node elements is enabled. *[default=false]*
+5. **highlightParent** - if set to true, when a box is hovered over, the relationship to the parent box will be highlighted in yellow.
+6. **collapse** - if set to false, the tree will not be allowed to collapse or expand.
+7. **cb** - if set to a function, that function will be called after every successful render of a box. A jQuery DOM object representation of that node will be passed as an argument.

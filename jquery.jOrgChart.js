@@ -16,10 +16,6 @@
   $.fn.jOrgChart = function(options) {
     var opts = $.extend({}, $.fn.jOrgChart.defaults, options);
     var $appendTo = $(opts.chartElement);
-    var callbackFunction = opts.cb;
-    if (typeof callbackFunction != 'function') {
-        callbackFunction = $.noop;
-    }
 
     // build the tree
     $this = $(this);
@@ -190,6 +186,11 @@
     var $childNodes = $node.children("ul:first").children("li");
     var $nodeDiv;
     
+    var callbackFunction = opts.cb;
+    if (typeof callbackFunction != 'function') {
+        callbackFunction = $.noop;
+    }
+
     if($childNodes.length > 1) {
       $nodeCell.attr("colspan", $childNodes.length * 2);
     }
@@ -209,7 +210,7 @@
     }
 
     // Expand and contract nodes
-    if ($childNodes.length > 0 && opts.collapse) {
+    if ($childNodes.length > 0 && opts.collapse !== false) {
       $nodeDiv.click(function() {
           var $this = $(this);
           var $tr = $this.closest("tr");
@@ -231,7 +232,7 @@
     $tbody.append($nodeRow);
 
     if($childNodes.length > 0) {
-      if (opts.collapse) {
+      if (opts.collapse !== false) {
         // if it can be expanded then change the cursor
         $nodeDiv.css('cursor','n-resize').addClass('expanded');
       }
