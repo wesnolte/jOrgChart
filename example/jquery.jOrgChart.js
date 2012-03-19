@@ -214,7 +214,7 @@
     }
 
     // Expand and contract nodes
-    if ($childNodes.length > 0 && opts.collapse) {
+    if ($childNodes.length > 0 && opts.collapse !== false) {
       $nodeDiv.click(function() {
           var $this = $(this);
           var $tr = $this.closest("tr");
@@ -236,7 +236,7 @@
     $tbody.append($nodeRow);
 
     if($childNodes.length > 0) {
-      if (opts.collapse) {
+      if (opts.collapse !== false) {
         // if it can be expanded then change the cursor
         $nodeDiv.css('cursor','n-resize').addClass('expanded');
       }
