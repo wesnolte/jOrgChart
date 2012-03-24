@@ -35,7 +35,7 @@
             distance    : 40,
             helper      : 'clone',
             opacity     : 0.8,
-            revert      : true,
+            revert      : 'invalid',
             revertDuration : 100,
             snap        : 'div.node.expanded',
             snapMode    : 'inner',
@@ -68,68 +68,24 @@
     
       // Drop event handler for nodes
       $('div.node').bind("drop", function handleDropEvent( event, ui ) {    
-        var sourceNode = ui.draggable;
-        var targetNode = $(this);
-        
-        // finding nodes based on plaintext and html
-        // content is hard!
-        var targetLi = $('li').filter(function(){
-            
-            li = $(this).clone()
-                        .children("ul,li")
-                        .remove()
-                    .end();
-                    var attr = li.attr('id');
-                    if (typeof attr !== 'undefined' && attr !== false) {
-                        return li.attr("id") == targetNode.attr("id");
-                    }
-                    else {
-                        return li.html() == targetNode.html();
-                    }
-            
-        });     
-        
-        var sourceLi = $('li').filter(function(){
-            
-            li = $(this).clone()
-                        .children("ul,li")
-                        .remove()
-                    .end();
-                    var attr = li.attr('id');
-                    if (typeof attr !== 'undefined' && attr !== false) {
-                        return li.attr("id") == sourceNode.attr("id");
-                    }
-                    else {
-                        return li.html() == sourceNode.html();
-                    }
-            
-        });
-        
-        var sourceliClone = sourceLi.clone();
+	  
+        var targetLi = $this.find("[data-tree-node=" + $(this).data("tree-node") + "]");        
+        var sourceLi = $this.find("[data-tree-node=" + ui.draggable.data("tree-node") + "]");
         var sourceUl = sourceLi.parent('ul');
-        
-        if(sourceUl.children('li').size() > 1){
-            sourceLi.remove();          
-        }else{
-            sourceUl.remove();
-        }
-        
-        var id = sourceLi.attr("id");
 
-        if(targetLi.children('ul').size() >0){
-            if (typeof id !== 'undefined' && id !== false) {
-                targetLi.children('ul').append('<li id="'+id+'">'+sourceliClone.html()+'</li>');
-            }else{
-                targetLi.children('ul').append('<li>'+sourceliClone.html()+'</li>');        
-            }
-        }else{
-            if (typeof id !== 'undefined' && id !== false) {
-                targetLi.append('<ul><li id="'+id+'">'+sourceliClone.html()+'</li></ul>');
-            }else{
-                targetLi.append('<ul><li>'+sourceliClone.html()+'</li></ul>');                  
-            }
+		var targetUl = targetLi.children('ul');
+		if (targetUl.length > 0){
+			targetUl.append(sourceLi);
+        } else {
+			targetLi.append("<ul></ul>");
+			targetLi.children('ul').append(sourceLi);
         }
         
+		//Removes any empty lists
+		if (sourceUl.children().length === 0){
+			sourceUl.remove();
+		}
+		
       }); // handleDropEvent
         
     } // Drag and drop
@@ -142,7 +98,8 @@
     chartClass : "jOrgChart",
     dragAndDrop: false
   };
-
+	
+  var nodeCount = 0;
   // Method that recursively builds the tree
   function buildNode($node, $appendTo, level, opts) {
     var $table = $("<table cellpadding='0' cellspacing='0' border='0'/>");
@@ -162,15 +119,15 @@
     var $nodeContent = $node.clone()
                             .children("ul,li")
                             .remove()
-                        .end()
-                        .html();
-                        
-    var new_node_id = $node.attr("id");
-    if (typeof new_node_id !== 'undefined' && new_node_id !== false) {
-        $nodeDiv = $("<div>").addClass("node").attr("id", $node.attr("id")).append($nodeContent);
-    }else{
-        $nodeDiv = $("<div>").addClass("node").append($nodeContent);
-    }
+                            .end()
+                            .html();
+	
+    //Increaments the node count which is used to link the source list and the org chart
+	nodeCount++;
+	$node.attr("data-tree-node", nodeCount);
+	$nodeDiv = $("<div>").addClass("node")
+                                   .attr("data-tree-node", nodeCount)
+                                   .append($nodeContent);
 
     // Expand and contract nodes
     if ($childNodes.length > 0) {
