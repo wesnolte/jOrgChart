@@ -69,22 +69,25 @@
       // Drop event handler for nodes
       $('div.node').bind("drop", function handleDropEvent( event, ui ) {    
 	  
-        var targetLi = $this.find("[data-tree-node=" + $(this).data("tree-node") + "]");        
-        var sourceLi = $this.find("[data-tree-node=" + ui.draggable.data("tree-node") + "]");
+        var targetID = $(this).data("tree-node");
+        var targetLi = $this.find("li").filter(function() { return $(this).data("tree-node") === targetID; } );
+        var targetUl = targetLi.children('ul');
+		
+        var sourceID = ui.draggable.data("tree-node");		
+        var sourceLi = $this.find("li").filter(function() { return $(this).data("tree-node") === sourceID; } );		
         var sourceUl = sourceLi.parent('ul');
 
-		var targetUl = targetLi.children('ul');
-		if (targetUl.length > 0){
-			targetUl.append(sourceLi);
+        if (targetUl.length > 0){
+		    targetUl.append(sourceLi);
         } else {
-			targetLi.append("<ul></ul>");
-			targetLi.children('ul').append(sourceLi);
+		    targetLi.append("<ul></ul>");
+		    targetLi.children('ul').append(sourceLi);
         }
         
-		//Removes any empty lists
-		if (sourceUl.children().length === 0){
-			sourceUl.remove();
-		}
+        //Removes any empty lists
+        if (sourceUl.children().length === 0){
+            sourceUl.remove();
+        }
 		
       }); // handleDropEvent
         
@@ -124,9 +127,9 @@
 	
     //Increaments the node count which is used to link the source list and the org chart
 	nodeCount++;
-	$node.attr("data-tree-node", nodeCount);
+	$node.data("tree-node", nodeCount);
 	$nodeDiv = $("<div>").addClass("node")
-                                   .attr("data-tree-node", nodeCount)
+                                   .data("tree-node", nodeCount)
                                    .append($nodeContent);
 
     // Expand and contract nodes
