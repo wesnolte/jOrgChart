@@ -18,7 +18,7 @@
     var $appendTo = $(opts.chartElement);
 
     // build the tree
-    var $this = $(this);
+    $this = $(this);
     var $container = $("<div class='" + opts.chartClass + "'/>");
     if($this.is("ul")) {
       buildNode($this.find("li:first"), $container, 0, opts);
@@ -68,27 +68,27 @@
     
       // Drop event handler for nodes
       $('div.node').bind("drop", function handleDropEvent( event, ui ) {    
-	  
+    
         var targetID = $(this).data("tree-node");
         var targetLi = $this.find("li").filter(function() { return $(this).data("tree-node") === targetID; } );
         var targetUl = targetLi.children('ul');
-		
-        var sourceID = ui.draggable.data("tree-node");		
-        var sourceLi = $this.find("li").filter(function() { return $(this).data("tree-node") === sourceID; } );		
+    
+        var sourceID = ui.draggable.data("tree-node");    
+        var sourceLi = $this.find("li").filter(function() { return $(this).data("tree-node") === sourceID; } );   
         var sourceUl = sourceLi.parent('ul');
 
         if (targetUl.length > 0){
-		    targetUl.append(sourceLi);
+          targetUl.append(sourceLi);
         } else {
-		    targetLi.append("<ul></ul>");
-		    targetLi.children('ul').append(sourceLi);
+          targetLi.append("<ul></ul>");
+          targetLi.children('ul').append(sourceLi);
         }
         
         //Removes any empty lists
         if (sourceUl.children().length === 0){
-            sourceUl.remove();
+          sourceUl.remove();
         }
-		
+    
       }); // handleDropEvent
         
     } // Drag and drop
@@ -101,7 +101,7 @@
     chartClass : "jOrgChart",
     dragAndDrop: false
   };
-	
+  
   var nodeCount = 0;
   // Method that recursively builds the tree
   function buildNode($node, $appendTo, level, opts) {
@@ -124,13 +124,13 @@
                             .remove()
                             .end()
                             .html();
-	
-    //Increaments the node count which is used to link the source list and the org chart
-	nodeCount++;
-	$node.data("tree-node", nodeCount);
-	$nodeDiv = $("<div>").addClass("node")
-                                   .data("tree-node", nodeCount)
-                                   .append($nodeContent);
+  
+      //Increaments the node count which is used to link the source list and the org chart
+    nodeCount++;
+    $node.data("tree-node", nodeCount);
+    $nodeDiv = $("<div>").addClass("node")
+                                     .data("tree-node", nodeCount)
+                                     .append($nodeContent);
 
     // Expand and contract nodes
     if ($childNodes.length > 0) {
@@ -142,10 +142,16 @@
             $this.css('cursor','n-resize');
             $tr.removeClass('contracted').addClass('expanded');
             $tr.nextAll("tr").css('visibility', '');
+
+            // Update the <li> appropriately so that if the tree redraws collapsed/non-collapsed nodes
+            // maintain their appearance
+            $node.removeClass('collapsed');
           }else{
             $this.css('cursor','s-resize');
             $tr.removeClass('expanded').addClass('contracted');
             $tr.nextAll("tr").css('visibility', 'hidden');
+
+            $node.addClass('collapsed');
           }
         });
     }
@@ -156,7 +162,7 @@
 
     if($childNodes.length > 0) {
       // if it can be expanded then change the cursor
-      $nodeDiv.css('cursor','n-resize').addClass('expanded');
+      $nodeDiv.css('cursor','n-resize');
     
       // recurse until leaves found (-1) or to the level specified
       if(opts.depth == -1 || (level+1 < opts.depth)) { 
@@ -165,7 +171,7 @@
         $downLineRow.append($downLineCell);
         
         // draw the connecting line from the parent node to the horizontal line 
-        var $downLine = $("<div></div>").addClass("line down");
+        $downLine = $("<div></div>").addClass("line down");
         $downLineCell.append($downLine);
         $tbody.append($downLineRow);
 
@@ -204,7 +210,8 @@
         var classList = $node.attr('class').split(/\s+/);
         $.each(classList, function(index,item) {
             if (item == 'collapsed') {
-                $nodeRow.nextAll('tr').css('display', 'none');
+                console.log($node);
+                $nodeRow.nextAll('tr').css('visibility', 'hidden');
                     $nodeRow.removeClass('expanded');
                     $nodeRow.addClass('contracted');
                     $nodeDiv.css('cursor','s-resize');
