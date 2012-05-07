@@ -18,7 +18,7 @@
     var $appendTo = $(opts.chartElement);
 
     // build the tree
-    $this = $(this);
+    var $this = $(this);
     var $container = $("<div class='" + opts.chartClass + "'/>");
     if($this.is("ul")) {
       buildNode($this.find("li:first"), $container, 0, opts);
@@ -165,7 +165,7 @@
         $downLineRow.append($downLineCell);
         
         // draw the connecting line from the parent node to the horizontal line 
-        $downLine = $("<div></div>").addClass("line down");
+        var $downLine = $("<div></div>").addClass("line down");
         $downLineCell.append($downLine);
         $tbody.append($downLineRow);
 
