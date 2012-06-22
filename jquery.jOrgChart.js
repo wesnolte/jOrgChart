@@ -10,6 +10,9 @@
  * Copyright (c) 2011 Wesley Nolte
  * Dual licensed under the MIT and GPL licenses.
  *
+ * Ability to accept javscript object added by David Herse
+ * http://davidherse.com
+ *
  */
 (function($) {
 
@@ -17,8 +20,16 @@
     var opts = $.extend({}, $.fn.jOrgChart.defaults, options);
     var $appendTo = $(opts.chartElement);
 
-    // build the tree
-    $this = $(this);
+    if(opts.dataObject){
+        // create a list from an object		 
+		$this = $(createListItem('ul')).attr("id" , 'workflow_list');
+		buildList(opts.dataObject, $this);
+		$('body').append($this.hide());
+	} else {
+		// build the tree
+	    $this = $(this);
+	}
+	
     var $container = $("<div class='" + opts.chartClass + "'/>");
     if($this.is("ul")) {
       buildNode($this.find("li:first"), $container, 0, opts);
@@ -101,6 +112,38 @@
     chartClass : "jOrgChart",
     dragAndDrop: false
   };
+  
+  var createListItem = function(){
+       var workflow_li = '<li class="list_item"></li>',
+       workflow_ul = '<ul class="list"></ul>';
+       return function(type, value){
+           if(type == 'ul'){
+               return $(workflow_ul);
+           } else {
+               return $(workflow_li).addClass(value).text(value);
+           }
+       };
+   }();
+
+   var buildList = function(items, parent){
+       for(var name in items){
+           if(parent.hasClass('list')){
+               parent.append(createListItem('li', name));
+           } else {
+               var child_ul = parent.children('ul');
+               if(child_ul.length == 0){
+                   parent.append($('<ul/>'));
+               }
+               parent.children('ul').append(createListItem('li', name));
+           }
+           if(typeof items[name] == 'object'){
+               var new_parent = parent.find('.'+name);
+               buildList(items[name], new_parent);
+           } else {
+               parent.find('.'+name).text(parent.find('.'+name).text()+" : "+items[name]);
+           } 	
+       }
+   };
   
   var nodeCount = 0;
   // Method that recursively builds the tree
