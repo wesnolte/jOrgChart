@@ -111,7 +111,7 @@ Excluded the 'chartElement' parameter and add a 'dataObject' parameter. For exam
 
 	$("#chart").jOrgChart({
 		dataObject : jsObject 
-   });
+	});
 
 ----
 ##Demo
