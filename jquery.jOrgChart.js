@@ -99,7 +99,8 @@
     chartElement : 'body',
     depth      : -1,
     chartClass : "jOrgChart",
-    dragAndDrop: false
+    dragAndDrop: false,
+    ignoreSpace: false
   };
   
   var nodeCount = 0;
@@ -141,7 +142,7 @@
           if($tr.hasClass('contracted')){
             $this.css('cursor','n-resize');
             $tr.removeClass('contracted').addClass('expanded');
-            $tr.nextAll("tr").css('visibility', '');
+            $tr.nextAll("tr").css(opts.ignoreSpace ? 'display' : 'visibility', '');
 
             // Update the <li> appropriately so that if the tree redraws collapsed/non-collapsed nodes
             // maintain their appearance
@@ -149,7 +150,8 @@
           }else{
             $this.css('cursor','s-resize');
             $tr.removeClass('expanded').addClass('contracted');
-            $tr.nextAll("tr").css('visibility', 'hidden');
+            if(opts.ignoreSpace) { $tr.nextAll("tr").css('display', 'none'); }
+            else { $tr.nextAll("tr").css('visibility', 'hidden'); }
 
             $node.addClass('collapsed');
           }
@@ -211,7 +213,8 @@
         $.each(classList, function(index,item) {
             if (item == 'collapsed') {
                 console.log($node);
-                $nodeRow.nextAll('tr').css('visibility', 'hidden');
+                if(opts.ignoreSpace) { $nodeRow.nextAll('tr').css('display', 'none'); }
+                else { $nodeRow.nextAll('tr').css('visibility', 'hidden'); }
                     $nodeRow.removeClass('expanded');
                     $nodeRow.addClass('contracted');
                     $nodeDiv.css('cursor','s-resize');
