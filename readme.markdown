@@ -117,9 +117,10 @@ Source code with an example is available [here](https://github.com/wesnolte/jOrg
 
 ##Configuration
 
-There are only 3 configuration options.
+There are only 5 configuration options.
 
 1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to. *[default='body']*
 2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. *[default=-1]*
 3. **chartClass** - the name of the style class that is assigned to the generated markup. *[default='jOrgChart']*
 4. **dragAndDrop** - determines whether the drag-and-drop feature of tree node elements is enabled. *[default=false]*
+5. **ignoreSpace** - if true, no space is used by collapsed nodes. if false, the width and height of the graph stays the same when collapsing nodes. *[default=false]*
