@@ -54,7 +54,7 @@
         var sourceNode = $(this);
         sourceNode.parentsUntil('.node-container')
                    .find('*')
-                   .filter('.node')
+                   .filter('.node:data(draggable)')
                    .droppable('disable');
       });
 
