@@ -117,7 +117,7 @@ Source code with an example is available [here](https://github.com/wesnolte/jOrg
 
 ##Configuration
 
-There are only 3 configuration options.
+There are only 4 configuration options.
 
 1. **chartElement** - used to specify which HTML element you'd like to append the OrgChart markup to. *[default='body']*
 2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. *[default=-1]*
