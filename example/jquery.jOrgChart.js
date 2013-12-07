@@ -30,7 +30,7 @@
 
     // add drag and drop if enabled
     if(opts.dragAndDrop){
-        $('div.node').draggable({
+        $('.'+opts.chartClass+' div.node').draggable({
             cursor      : 'move',
             distance    : 40,
             helper      : 'clone',
@@ -42,14 +42,14 @@
             stack       : 'div.node'
         });
         
-        $('div.node').droppable({
+        $('.'+opts.chartClass+' div.node').droppable({
             accept      : '.node',          
             activeClass : 'drag-active',
             hoverClass  : 'drop-hover'
         });
         
       // Drag start event handler for nodes
-      $('div.node').bind("dragstart", function handleDragStart( event, ui ){
+      $('.'+opts.chartClass+' div.node').bind("dragstart", function handleDragStart( event, ui ){
         
         var sourceNode = $(this);
         sourceNode.parentsUntil('.node-container')
@@ -59,7 +59,7 @@
       });
 
       // Drag stop event handler for nodes
-      $('div.node').bind("dragstop", function handleDragStop( event, ui ){
+      $('.'+opts.chartClass+' div.node').bind("dragstop", function handleDragStop( event, ui ){
 
         /* reload the plugin */
         $(opts.chartElement).children().remove();
@@ -67,7 +67,7 @@
       });
     
       // Drop event handler for nodes
-      $('div.node').bind("drop", function handleDropEvent( event, ui ) {    
+      $('.'+opts.chartClass+' div.node').bind("drop", function handleDropEvent( event, ui ) {    
 	  
         var targetID = $(this).data("tree-node");
         var targetLi = $this.find("li").filter(function() { return $(this).data("tree-node") === targetID; } );
