@@ -103,6 +103,17 @@ This call will append the markup for the OrgChart to the `<body>` element by def
 
 ----
 
+-----
+
+###Option to pass in javascript object
+
+Excluded the 'chartElement' parameter and add a 'dataObject' parameter. For example:
+
+	$("#chart").jOrgChart({
+		dataObject : jsObject 
+	});
+
+----
 ##Demo
 
 You can view a demo of this [here](http://bit.ly/u1XhTf "jQuery OrgChart").
