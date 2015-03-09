@@ -210,7 +210,7 @@
         var classList = $node.attr('class').split(/\s+/);
         $.each(classList, function(index,item) {
             if (item == 'collapsed') {
-                console.log($node);
+                
                 $nodeRow.nextAll('tr').css('visibility', 'hidden');
                     $nodeRow.removeClass('expanded');
                     $nodeRow.addClass('contracted');
