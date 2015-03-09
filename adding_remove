@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>jOrgChart - A jQuery OrgChart Plugin</title>
+    <link rel="stylesheet" href="css/jquery.jOrgChart.css"/>
+    
+    <!-- jQuery includes -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    <script src="jquery.jOrgChart.js"></script>
+
+	<style>
+		#chart {
+			width: 950px;
+			max-height: 400px;
+			overflow-x: auto;
+			padding: 10px 0;
+		}
+		.jOrgChart .node-cell .node {
+			background-color: white !important;
+			color: black;
+			border: 1px solid black;
+			font-size: 14px;
+			width: 120px;
+			height: 50px;
+		}
+		.jOrgChart .node-cell .node.actived {
+			background-color: black !important;
+			color: white;
+		}
+		.jOrgChart table {
+			width: auto;
+			margin-left: auto;
+			margin-right: auto;
+			font-size: 14px;
+		}
+		.jOrgChart .node-cell .rmv-nd {
+			float: right;
+			margin: 1px;
+		}
+	</style>
+    
+  </head>
+
+  <body>
+
+
+	<select id="comboBox">
+		<option value="1">option 1</option>
+		<option value="2">option 2</option>
+		<option value="3">option 3</option>
+		<option value="4">option 4</option>
+		<option value="5">option 5</option>
+		<option value="6">option 6</option>
+		<option value="7">option 7</option>
+		<option value="8">option 8</option>
+		<option value="9">option 9</option>
+		<option value="10">option 10</option>
+	</select>
+
+	<button id="btnAddOrg" type="button">Add</button>
+
+	<div id="org" style="display:none">
+		<ul></ul>
+	</div>
+
+	<div id="chart" class="orgChart"></div>
+
+	<script type="text/javascript">
+	$(document).ready(function () {
+
+		$("#btnAddOrg").click(function () {
+			var name = $("#comboBox option:selected").text();
+			var val = $("#comboBox option:selected").val();
+			var name_actived = '';
+			$('#comboBox option[value=' + val + ']').attr('disabled', true);
+			var val_f = 'org';
+			$("div.node").each(function () {
+				var _this = $(this);
+				var txt_name = _this.find('span.name_c').attr('id');
+				if (_this.hasClass('actived')) {
+					$("#comboBox option").each(function () {
+						if (txt_name === $(this).val()) {
+							name_actived = $(this).val();
+							val_f = 'li_' + $(this).val();
+							if (!$("#" + val_f + ' ul').length) {
+								$("#" + val_f).append('<ul></ul>');
+							}
+						}
+					});
+				}
+			});
+			$("#" + val_f + " ul").append('<li id="li_' + val + '"><a class="rmv-nd" href="javascript:void(0);">Remove</a><br style="clear:both"/><span id="' + val + '" class="name_c">' + name + '</span></li>');
+			$(".jOrgChart").remove();
+			$("#org ul").jOrgChart({chartElement: '#chart'});
+			if (val_f === 'org') {
+				$('div.node').addClass('actived');
+			} else {
+				$("div.node").each(function () {
+					var _this = $(this);
+					var txt_name = _this.find('span.name_c').attr('id');
+					if (txt_name === name_actived) {
+						_this.addClass('actived');
+					}
+				});
+			}
+			if ($('#comboBox option:enabled').length === 0) {
+				$("#btnAddOrg").attr('disabled', true);
+			}
+		});
+		
+		/*If not is removing, is conflict in jQuery.jOrgChart.js, line 227 --> Prevent trees collapsing if a link inside a node is clicked */
+		$(".rmv-nd").live('click', function () {
+			var id = $(this).parent().find('span.name_c').attr('id');
+			$('#org #li_' + id).remove();
+			$(".jOrgChart").remove();
+			$("#org ul").jOrgChart({chartElement: '#chart'});
+		});
+		
+		$(".node-cell .node").live('click', function () {
+			$(".node-cell .node").removeClass('actived');
+			$(this).addClass('actived');
+		});
+		
+	});
+	</script>
+	</body>
+</html>
