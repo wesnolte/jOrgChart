@@ -21,7 +21,7 @@
     $this = $(this);
     var $container = $("<div class='" + opts.chartClass + "'/>");
     if($this.is("ul")) {
-      buildNode($this.find("li:first"), $container, 0, opts);
+      buildNodes($this, $container, opts);
     }
     else if($this.is("li")) {
       buildNode($this, $container, 0, opts);
@@ -102,6 +102,25 @@
     dragAndDrop: false
   };
   
+  function buildNodes($list, $appendTo, opts) {
+    var $table = $("<table cellpadding='0' cellspacing='0' border='0'/>");
+    var $tbody = $("<tbody/>");
+
+    // Construct the node container(s)
+    var $nodeRow = $("<tr/>");
+    $list.children("li").each(function(i, elem) {
+      var $td = $("<td class='node-container'/>");
+      $td.attr("colspan", 2);
+
+      buildNode($(elem), $td, 0, opts);
+      $nodeRow.append($td);
+    });
+
+    $tbody.append($nodeRow);
+    $table.append($tbody);
+    $appendTo.append($table);
+  }
+
   var nodeCount = 0;
   // Method that recursively builds the tree
   function buildNode($node, $appendTo, level, opts) {
