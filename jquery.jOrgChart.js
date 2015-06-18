@@ -84,6 +84,8 @@
           targetLi.children('ul').append(sourceLi);
         }
         
+        $this.trigger("jOrgChart.nodeChanged", { targetID: targetLi.data("id"), sourceId: sourceLi.data("id") } );
+        
         //Removes any empty lists
         if (sourceUl.children().length === 0){
           sourceUl.remove();
