@@ -100,7 +100,8 @@
     depth         : -1,
     chartClass    : "jOrgChart",
     dragAndDrop   : false,
-    autoHeight    : false
+    autoHeight    : false,  //custom
+    collapsible   : false   //custom
   };
   
   var nodeCount = 0;
@@ -134,7 +135,7 @@
                                      .append($nodeContent);
 
     // Expand and contract nodes
-    if ($childNodes.length > 0) {
+    if ($childNodes.length > 0 && opts.collapsible) {
       $nodeDiv.click(function() {
           var $this = $(this);
           var $tr = $this.closest("tr");
@@ -164,8 +165,9 @@
 
     if($childNodes.length > 0) {
       // if it can be expanded then change the cursor
-      $nodeDiv.css('cursor','n-resize');
-    
+      if(opts.collapsible){
+        $nodeDiv.css('cursor','n-resize');
+      }
       // recurse until leaves found (-1) or to the level specified
       if(opts.depth == -1 || (level+1 < opts.depth)) { 
         var $downLineRow = $("<tr/>");
@@ -212,12 +214,14 @@
         var classList = $node.attr('class').split(/\s+/);
         $.each(classList, function(index,item) {
             if (item == 'collapsed') {
-                console.log($node);
+              if(opts.collapsible){
+                window.console && console.log($node); //firefox crashes in some versions without this check
                 if(opts.autoHeight) { $nodeRow.nextAll('tr').css('display', 'none'); }
                 else { $nodeRow.nextAll('tr').css('visibility', 'hidden'); }
                     $nodeRow.removeClass('expanded');
                     $nodeRow.addClass('contracted');
                     $nodeDiv.css('cursor','s-resize');
+              }
             } else {
                 $nodeDiv.addClass(item);
             }
