@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="css/custom.css"/>
     <link href="css/prettify.css" type="text/css" rel="stylesheet" />
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+
     <script type="text/javascript" src="prettify.js"></script>
     
     <!-- jQuery includes -->
@@ -19,6 +21,9 @@
         $("#org").jOrgChart({
             chartElement : '#chart',
             dragAndDrop  : true,
+            autoHeight   : true,
+            collapsible  : true,
+            showButton   : true
         });
     });
     </script>
