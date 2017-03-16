@@ -1,5 +1,9 @@
 #Readme
 
+Credited to : 
+- gdott9
+- beatjunky99
+- KingGeneral
 
 ##Overview
 
@@ -123,3 +127,6 @@ There are only 3 configuration options:
 2. **depth** - tells the code what depth to parse to. The default value of "-1" instructs it to parse like it's 1999. *[default=-1]*
 3. **chartClass** - the name of the style class that is assigned to the generated markup. *[default='jOrgChart']*
 4. **dragAndDrop** - determines whether the drag-and-drop feature of tree node elements is enabled. *[default=false]*
+5. **autoHeight** - ignore space when parent is not collapsed
+6. **collapsible** - disable collapse feature (disable click feature)
+7. **showButton** - add indicator icon when parent is not collapsed (fontawesome icon)

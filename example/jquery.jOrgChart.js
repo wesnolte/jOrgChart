@@ -102,7 +102,7 @@
     dragAndDrop   : false,
     autoHeight    : false,  //custom
     collapsible   : false,  //custom
-    showButton       : false   //custom
+    showButton    : false   //custom
   };
   
   var nodeCount = 0;
