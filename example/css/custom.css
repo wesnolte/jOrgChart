@@ -90,3 +90,16 @@ a:hover{
 		line-height 	: 11px;
 		padding 		: 2px;
 	}
+
+/* f0fe, f0dd, f103, f078, f13a */
+.add_btn:before{
+  font-family: "FontAwesome";  
+  font-size: 30px;
+  content: "\f078";
+  color: #9F20B3;
+  position: relative;
+  left: 40px;
+  top: 57px;
+  float: right;
+  width: 0px;
+}

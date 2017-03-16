@@ -101,7 +101,8 @@
     chartClass    : "jOrgChart",
     dragAndDrop   : false,
     autoHeight    : false,  //custom
-    collapsible   : false   //custom
+    collapsible   : false,  //custom
+    showButton       : false   //custom
   };
   
   var nodeCount = 0;
@@ -142,7 +143,7 @@
 
           if($tr.hasClass('contracted')){
             $this.css('cursor','n-resize');
-            $tr.removeClass('contracted').addClass('expanded');
+            $tr.removeClass(opts.showButton ? 'contracted add_btn' : 'contracted').addClass('expanded');
             $tr.nextAll("tr").css(opts.autoHeight ? 'display' : 'visibility', '');
 
             // Update the <li> appropriately so that if the tree redraws collapsed/non-collapsed nodes
@@ -150,7 +151,7 @@
             $node.removeClass('collapsed');
           }else{
             $this.css('cursor','s-resize');
-            $tr.removeClass('expanded').addClass('contracted');
+            $tr.removeClass('expanded').addClass(opts.showButton ? 'contracted add_btn' : 'contracted');
             if(opts.autoHeight) { $tr.nextAll("tr").css('display', 'none'); }
             else { $tr.nextAll("tr").css('visibility', 'hidden'); }
 
@@ -219,7 +220,7 @@
                 if(opts.autoHeight) { $nodeRow.nextAll('tr').css('display', 'none'); }
                 else { $nodeRow.nextAll('tr').css('visibility', 'hidden'); }
                     $nodeRow.removeClass('expanded');
-                    $nodeRow.addClass('contracted');
+                    $nodeRow.addClass(opts.showButton ? 'contracted add_btn' : 'contracted');
                     $nodeDiv.css('cursor','s-resize');
               }
             } else {
