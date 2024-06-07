@@ -1,7 +1,7 @@
-#Readme
+# Readme
 
 
-##Overview
+## Overview
 
 Follow me [@wesnolte](http://twitter.com/wesnolte)
 
@@ -20,13 +20,13 @@ Features include:
 
 ----
 
-##Expected Markup & Example Usage
+## Expected Markup & Example Usage
 
 To get up and running you'll need a few things. 
 
 -----
 
-###The JavaScript Libraries & CSS
+### The JavaScript Libraries & CSS
 
 You need to include the jQuery as well as the jOrgChart libraries. For example:
 
@@ -43,7 +43,7 @@ The core CSS is necessary to perform some of the basic styling i.e.
 
 ----
 
-###The HTML
+### The HTML
 
 You'll need to construct a nest unordered list that represents your node nesting. For example:
 
@@ -91,7 +91,7 @@ This plugin works by generating the tree as a series of nested tables. Each node
 
 -----
 
-###The jQuery Call
+### The jQuery Call
 
 And the cherry on the top is the usual call, often but not always on document load. You'll need to specify the Id of the list in this call. For example:
 
@@ -103,19 +103,19 @@ This call will append the markup for the OrgChart to the `<body>` element by def
 
 ----
 
-##Demo
+## Demo
 
 You can view a demo of this [here](http://bit.ly/u1XhTf "jQuery OrgChart").
 
 ------
 
-##Sourcecode
+## Source Code
 
 Source code with an example is available [here](https://github.com/wesnolte/jOrgChart/tree/master/example "Example & Source").
 
 -----
 
-##Configuration
+## Configuration
 
 There are only 3 configuration options:
 
