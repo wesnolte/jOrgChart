@@ -105,7 +105,7 @@ This call will append the markup for the OrgChart to the `<body>` element by def
 
 ## Demo
 
-You can view a demo of this [here](http://bit.ly/u1XhTf "jQuery OrgChart").
+You can view a demo of this [here](https://wesnolte.github.io/jOrgChart/).
 
 ------
 
