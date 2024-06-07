@@ -1,0 +1,92 @@
+body, html, div, p, span, a, h1, h2, h3, h4, h5{
+	margin 				: 0;
+	padding 			: 0;
+}
+
+body, html{	
+	width 				: 100%;
+}
+
+body{
+	background 			: url('../images/bkgd.png') repeat top left;
+	color 				: white;
+	font-family 		: tahoma;
+	font-weight 		: lighter;
+	padding-top 		: 40px;
+}
+
+	body p{
+		font-size 		: 14px;
+	}
+	
+		body p a{
+			font-size	: 16px;
+		}
+
+h1 {
+	color 				: #E05E00;	
+	font-style 			: italic;
+}
+
+a{
+	color 				: #E05E00;	
+	text-decoration		: none;
+}
+
+a:hover{
+	text-decoration		: underline;
+}
+
+/* general */
+.clear {
+	clear: both;
+}
+
+/* Header */
+.brand{
+	color 				: #E05E00 !important;	
+	font-family 		: georgia;
+	font-style 			: italic;
+}
+
+/* list stuff */
+#org{
+	background-color 	: white;
+	margin 				: 10px;
+	padding 			: 10px;
+}
+
+#show-list{
+	cursor 				: pointer;
+}
+
+/* bootstrap overrides */
+.alert-message{
+	margin: 2px 0;
+}
+
+.topbar{
+	position 			: absolute;
+}
+
+/* Custom chart styling */
+.jOrgChart {
+  margin                : 10px;
+  padding               : 20px;
+}
+
+/* Custom node styling */
+.jOrgChart .node {
+	font-size 			: 14px;
+	background-color 	: #35363B;
+	border-radius 		: 8px;
+	border 				: 5px solid white;
+	color 				: #F38630;
+	-moz-border-radius 	: 8px;
+}
+	.node p{
+		font-family 	: tahoma;
+		font-size 		: 10px;
+		line-height 	: 11px;
+		padding 		: 2px;
+	}
